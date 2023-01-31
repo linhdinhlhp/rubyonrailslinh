@@ -10,6 +10,10 @@
   <%= @book.number_of_pages %>
 </p>
 
+  <div class="field">
+    <%= form.label :detail %>
+    <%= form.text_area :detail %>
+  </div>
 <p>
    <% if @book.image.attached? %>
      <%= image_tag @book.image %>
