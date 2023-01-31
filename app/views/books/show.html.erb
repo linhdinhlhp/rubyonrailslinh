@@ -10,10 +10,16 @@
   <%= @book.number_of_pages %>
 </p>
 
-  <div class="field">
-    <%= form.label :detail %>
-    <%= form.text_area :detail %>
+<h2>Review From</h2>
+<%= form_with(model: @book_review, local: true) do |form| %>
+  <div class= "field">
+    <%= form.text_area :review %>
+    <%= form.hidden_field :book_id, :value => @book.id %>
   </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
 <p>
    <% if @book.image.attached? %>
      <%= image_tag @book.image %>
