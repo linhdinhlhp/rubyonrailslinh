@@ -23,15 +23,19 @@ class BooksController < ApplicationController
 
   # POST /books or /books.json
   def create
-    @book = Book.new(book_params)
+    @book_review = BookReview.new(book_review_params)
+    @book_review.user_id = current_user.id
+
 
     respond_to do |format|
-      if @book.save
-        format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
-        format.json { render :show, status: :created, location: @book }
+      if @book_review.save
+        format.html { redirect_to @book_review, notice: "Book review was successfully created." }
+        url = "/books/" + @book_review.book_id.to_s
+        format.html { redirect_to url, notice: 'Book review was successfully created.' }
+        format.json { render :show, status: :created, location: @book_review }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+         format.json { render json: @book_review.errors, status: :unprocessable_entity }
       end
     end
   end
